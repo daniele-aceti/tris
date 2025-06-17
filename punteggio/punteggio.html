@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tabella Punteggi - Tris</title>
+
+    <!-- Font arcade -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-color: black;
+        color: white;
+        font-family: "Press Start 2P", cursive;
+        text-align: center;
+        padding: 40px 20px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      h1 {
+        color: yellow;
+        margin-bottom: 40px;
+        text-shadow: 2px 2px red;
+        font-size: 2rem;
+      }
+
+      table {
+        margin: 0 auto 40px auto;
+        border-collapse: collapse;
+        width: 90%;
+        max-width: 600px;
+        background-color: #111;
+        box-shadow: 0 0 10px orange;
+      }
+
+      th,
+      td {
+        border: 2px solid orange;
+        padding: 12px 20px;
+        font-size: 0.8rem;
+      }
+
+      th {
+        background-color: red;
+        color: yellow;
+        text-shadow: 1px 1px black;
+      }
+
+      td {
+        background-color: #222;
+      }
+
+      .btn-metal {
+        font-family: "Press Start 2P", cursive;
+        background-color: red;
+        color: yellow;
+        border: 3px solid orange;
+        padding: 15px 30px;
+        text-shadow: 1px 1px black;
+        font-size: 14px;
+        margin: 10px 10px 0 10px;
+        cursor: pointer;
+        transition: transform 0.2s;
+        display: inline-block;
+        user-select: none;
+        text-decoration: none;
+      }
+
+      .btn-metal:hover {
+        transform: scale(1.1);
+        background-color: orange;
+        color: black;
+        text-decoration: none;
+      }
+
+      .btn-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      /* Messaggio se non ci sono punteggi */
+      .empty-msg {
+        color: #aaa;
+        font-size: 0.9rem;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Classifica Punteggi</h1>
+
+    <table id="scoreTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Giocatore</th>
+          <th>Risultato</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Riga dati inserite dinamicamente -->
+      </tbody>
+    </table>
+
+    <div class="empty-msg" id="emptyMsg" style="display: none">
+      Nessun punteggio salvato.
+    </div>
+
+    <div class="btn-container">
+      <a href="/index.html" class="btn-metal">Torna alla partita</a>
+      <button id="clearScoresBtn" class="btn-metal">Cancella punteggi</button>
+    </div>
+    <script src="/js/index.js"></script>
+    <script>
+  // Funzione per caricare i risultati da localStorage e popolare la tabella
+  function caricaPunteggi() {
+    const risultati = JSON.parse(localStorage.getItem("risultati")) || [];
+    const tbody = document.querySelector("#scoreTable tbody");
+    const emptyMsg = document.getElementById("emptyMsg");
+
+    // Pulisci tbody
+    tbody.innerHTML = "";
+
+    if (risultati.length === 0) {
+      emptyMsg.style.display = "block";
+      return;
+    } else {
+      emptyMsg.style.display = "none";
+    }
+
+    risultati.forEach((risultato, index) => {
+      const tr = document.createElement("tr");
+
+      const tdIndex = document.createElement("td");
+      tdIndex.textContent = index + 1;
+
+      const tdGiocatore = document.createElement("td");
+      tdGiocatore.textContent = risultato.giocatore;
+
+      const tdRisultato = document.createElement("td");
+      tdRisultato.textContent = risultato.giocatore.includes("ha vinto") ? "Vittoria" : risultato.giocatore;
+
+      const tdData = document.createElement("td");
+      tdData.textContent = risultato.data;
+
+      tr.appendChild(tdIndex);
+      tr.appendChild(tdGiocatore);
+      tr.appendChild(tdRisultato);
+      tr.appendChild(tdData);
+
+      tbody.appendChild(tr);
+    });
+  }
+
+  // Funzione per cancellare tutti i punteggi
+  function cancellaPunteggi() {
+    if (confirm("Sei sicuro di voler cancellare tutti i punteggi?")) {
+      localStorage.removeItem("risultati");
+      caricaPunteggi();
+    }
+  }
+
+  // Event listener per il bottone cancella
+  document.getElementById("clearScoresBtn").addEventListener("click", cancellaPunteggi);
+
+  // Carica la tabella all'avvio
+  window.addEventListener("DOMContentLoaded", caricaPunteggi);
+</script>
+
+  </body>
+</html>

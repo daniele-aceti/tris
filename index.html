@@ -3,8 +3,110 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" />
     <title>Tris</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background-color: black;
+        color: white;
+        font-family: "Press Start 2P", cursive;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        font-size: 3rem;
+        color: yellow;
+        text-shadow: 2px 2px red;
+      }
+
+      .turnoXO {
+        font-size: 1rem;
+        margin-top: 10px;
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .box {
+        display: grid;
+        grid-template-columns: repeat(3, 100px);
+        grid-template-rows: repeat(3, 100px);
+        gap: 5px;
+      }
+
+      .cella {
+        background-color: #222;
+        border: 2px solid #555;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: white;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .cella img {
+        width: 80%;
+        height: 80%;
+        object-fit: contain;
+      }
+
+      .btn-metal {
+        font-family: "Press Start 2P", cursive;
+        background-color: red;
+        color: yellow;
+        border: 3px solid orange;
+        padding: 15px 30px;
+        text-shadow: 1px 1px black;
+        font-size: 14px;
+        transition: transform 0.2s;
+        margin: 15px 10px 0 10px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+      }
+
+      .btn-metal:hover {
+        transform: scale(1.1);
+        background-color: orange;
+        color: black;
+      }
+
+      /* Contenitore pulsanti */
+      main > div:last-child {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 30px;
+      }
+    </style>
+
+    <!-- Font stile arcade -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header>
@@ -24,9 +126,17 @@
         <div class="cella"></div>
         <div class="cella"></div>
       </div>
+      <div>
+        <a
+          onclick="return confirm(`Stai uscendo dalla pagina, i dati della partita andranno persi`)"
+          href="/pg/front_page.html"
+          class="btn-metal"
+          ><-- BACK</a
+        >
+        <a href="/punteggio/punteggio.html" class="btn-metal">PUNTEGGIO</a>
+      </div>
     </main>
 
-    <footer>Daniele Aceti</footer>
     <script src="./js/index.js"></script>
   </body>
 </html>
