@@ -20,16 +20,6 @@
 
 ---
 
-🚧 TO DO (FUTURE FEATURES)
-
-🤖 Modalità single player con AI
-
-🌍 Salvataggio remoto con backend
-
-🔁 Replay partita
-
-🔫 Modalità “Hardcore Metal” con timer
-
 🏅 CREATORE
 Realizzato da Daniele Aceti
 
